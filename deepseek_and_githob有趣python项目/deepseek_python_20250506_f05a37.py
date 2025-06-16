@@ -1,0 +1,324 @@
+import pkg_resources
+
+def check_installed_packages():
+    # 定义需要的第三方库列表
+    required_list = """
+    absl-py                       2.1.0
+    alabaster                     1.0.0
+    altgraph                      0.17.4
+    annotated-types               0.7.0
+    anyio                         4.7.0
+    argon2-cffi                   23.1.0
+    argon2-cffi-bindings          21.2.0
+    arrow                         1.3.0
+    asttokens                     3.0.0
+    astunparse                    1.6.3
+    async-lru                     2.0.4
+    attrs                         24.3.0
+    babel                         2.17.0
+    beautifulsoup4                4.12.3
+    biopython                     1.85
+    bleach                        6.2.0
+    blinker                       1.9.0
+    bs4                           0.0.2
+    by                            0.0.4
+    Cartopy                       0.24.1
+    certifi                       2024.7.4
+    cffi                          1.17.1
+    cfgv                          3.4.0
+    chardet                       5.2.0
+    charset-normalizer            3.3.2
+    chromedrivermanager           0.0.1
+    click                         8.1.7
+    colorama                      0.4.6
+    comm                          0.2.2
+    community                     1.0.0b1
+    contourpy                     1.2.1
+    cx_Freeze                     7.2.4
+    cx_Logging                    3.2.1
+    cycler                        0.12.1
+    Cython                        3.1.0a1
+    debugpy                       1.8.12
+    decorator                     5.1.1
+    defusedxml                    0.7.1
+    diagrams                      0.24.4
+    distlib                       0.3.9
+    distro                        1.9.0
+    docutils                      0.21.2
+    dukpy                         0.5.0
+    et_xmlfile                    2.0.0
+    executing                     2.2.0
+    fastjsonschema                2.21.1
+    ffmpeg                        1.4
+    filelock                      3.17.0
+    Flask                         3.1.0
+    flatbuffers                   25.2.10
+    fonttools                     4.53.0
+    fqdn                          1.5.1
+    fsspec                        2025.2.0
+    future                        1.0.0
+    gast                          0.6.0
+    google-pasta                  0.2.0
+    googletrans                   3.0.0
+    graphviz                      0.20.3
+    grpcio                        1.70.0
+    gurobipy                      12.0.1
+    h11                           0.14.0
+    h2                            3.2.0
+    h5py                          3.13.0
+    hpack                         3.0.0
+    hstspreload                   2024.12.1
+    httpcore                      1.0.7
+    httpx                         0.28.1
+    hyperframe                    5.2.0
+    identify                      2.6.10
+    idna                          2.10
+    imageio                       2.37.0
+    imageio-ffmpeg                0.6.0
+    imagesize                     1.4.1
+    ipykernel                     6.29.5
+    ipymol                        0.5
+    ipython                       8.31.0
+    ipywidgets                    8.1.5
+    isoduration                   20.11.0
+    itchat                        1.3.10
+    itk                           5.4.0
+    itk-core                      5.4.0
+    itk-filtering                 5.4.0
+    itk-io                        5.4.0
+    itk-numerics                  5.4.0
+    itk-registration              5.4.0
+    itk-segmentation              5.4.0
+    itsdangerous                  2.2.0
+    jedi                          0.19.2
+    jieba                         0.42.1
+    Jinja2                        3.1.6
+    jiter                         0.8.2
+    joblib                        1.4.2
+    json5                         0.10.0
+    jsonify                       0.5
+    jsonpointer                   3.0.0
+    jsonschema                    4.23.0
+    jsonschema-specifications     2024.10.1
+    jupyter                       1.1.1
+    jupyter_client                8.6.3
+    jupyter-console               6.6.3
+    jupyter_core                  5.7.2
+    jupyter-events                0.12.0
+    jupyter-lsp                   2.2.5
+    jupyter_server                2.15.0
+    jupyter_server_terminals      0.5.3
+    jupyterlab                    4.3.5
+    jupyterlab_pygments           0.3.0
+    jupyterlab_server             2.27.3
+    jupyterlab_widgets            3.0.13
+    keras                         3.8.0
+    kiwisolver                    1.4.5
+    lazy_loader                   0.4
+    libclang                      18.1.1
+    lief                          0.15.1
+    lxml                          5.3.0
+    Markdown                      3.7
+    markdown-it-py                3.0.0
+    MarkupSafe                    3.0.2
+    matplotlib                    3.9.1
+    matplotlib-inline             0.1.7
+    mdurl                         0.1.2
+    mermaid                       0.3.2
+    mistune                       3.1.1
+    ml-dtypes                     0.4.1
+    MouseInfo                     0.1.3
+    moviepy                       2.1.2
+    mpmath                        1.3.0
+    mss                           10.0.0
+    namex                         0.0.8
+    nbclient                      0.10.2
+    nbconvert                     7.16.6
+    nbformat                      5.10.4
+    nbsphinx                      0.9.6
+    nest-asyncio                  1.6.0
+    network                       0.1
+    networkx                      3.4.2
+    nltk                          3.9.1
+    nodeenv                       1.9.1
+    notebook                      7.3.2
+    notebook_shim                 0.2.4
+    numpy                         2.0.2
+    ollama                        0.4.7
+    openai                        1.58.1
+    opencv-python                 4.11.0.86
+    openpyxl                      3.2.0b1
+    opt_einsum                    3.4.0
+    optree                        0.14.1
+    outcome                       1.3.0.post0
+    overrides                     7.7.0
+    packaging                     24.1
+    pandas                        2.2.3
+    pandoc                        2.4
+    pandocfilters                 1.5.1
+    parso                         0.8.4
+    patsy                         1.0.1
+    pbkdf2                        1.3
+    pefile                        2023.2.7
+    pillow                        10.4.0
+    pip                           25.1.1
+    platformdirs                  4.3.6
+    plumbum                       1.9.0
+    ply                           3.11
+    pre_commit                    4.2.0
+    proglog                       0.1.10
+    progressbar2                  4.5.0
+    prometheus_client             0.21.1
+    prompt_toolkit                3.0.50
+    protobuf                      5.29.3
+    psutil                        6.1.1
+    PuLP                          3.1.1
+    pure_eval                     0.2.3
+    PyAutoGUI                     0.9.54
+    pyCirclize                    1.9.0
+    pycparser                     2.22
+    pydantic                      2.10.4
+    pydantic_core                 2.27.2
+    pygame                        2.6.0
+    PyGetWindow                   0.0.9
+    Pygments                      2.19.1
+    pyinstaller                   6.11.0
+    pyinstaller-hooks-contrib     2024.9
+    PyMsgBox                      1.0.9
+    PyMySQL                       1.1.1
+    pynput                        1.7.7
+    pynrrd                        1.1.3
+    pypandoc                      1.15
+    pyparsing                     3.1.2
+    pyperclip                     1.9.0
+    pypiwin32                     223
+    pypng                         0.20220715.0
+    pyproj                        3.7.1
+    PyQRCode                      1.2.1
+    PyQt5                         5.15.11
+    PyQt5-Qt                      5.15.2
+    PyQt5_sip                     12.17.0
+    PyRect                        0.2.0
+    PyScreeze                     1.0.1
+    pyshp                         2.3.1
+    PySocks                       1.7.1
+    python-dateutil               2.9.0.post0
+    python-dotenv                 1.0.1
+    python-json-logger            3.2.1
+    python-louvain                0.16
+    python-utils                  3.9.1
+    pytweening                    1.2.0
+    pytz                          2025.1
+    pywin32                       308
+    pywin32-ctypes                0.2.3
+    pywinpty                      2.0.15
+    PyYAML                        6.0.2
+    pyzmq                         26.2.1
+    referencing                   0.36.2
+    regex                         2024.9.11
+    reportlab                     4.3.0
+    requests                      2.32.3
+    rfc3339-validator             0.1.4
+    rfc3986                       1.5.0
+    rfc3986-validator             0.1.1
+    rich                          13.9.4
+    rpds-py                       0.22.3
+    scikit-image                  0.25.1
+    scikit-learn                  1.6.1
+    scipy                         1.14.0
+    seaborn                       0.13.2
+    selenium                      4.27.1
+    Send2Trash                    1.8.3
+    sequential                    1.0.0
+    setuptools                    80.3.1
+    shapely                       2.0.7
+    six                           1.16.0
+    sniffio                       1.3.1
+    snowballstemmer               2.2.0
+    sortedcontainers              2.4.0
+    soupsieve                     2.5
+    Sphinx                        8.1.3
+    sphinx-gallery                0.3.1
+    sphinxcontrib-applehelp       2.0.0
+    sphinxcontrib-devhelp         2.0.0
+    sphinxcontrib-htmlhelp        2.1.0
+    sphinxcontrib-jsmath          1.0.1
+    sphinxcontrib-qthelp          2.0.0
+    sphinxcontrib-serializinghtml 2.0.0
+    sqlite3py                     2.0.5
+    stack-data                    0.6.3
+    statsmodels                   0.14.4
+    sympy                         1.13.1
+    tabulate                      0.9.0
+    tensorboard                   2.18.0
+    tensorboard-data-server       0.7.2
+    tensorflow                    2.18.0
+    tensorflow_intel              2.18.0
+    termcolor                     2.5.0
+    terminado                     0.18.1
+    threadpoolctl                 3.5.0
+    tifffile                      2025.1.10
+    tinycss2                      1.4.0
+    torch                         2.6.0
+    tornado                       6.4.2
+    tqdm                          4.66.6
+    traitlets                     5.14.3
+    trio                          0.27.0
+    trio-websocket                0.11.1
+    types-python-dateutil         2.9.0.20241206
+    typing_extensions             4.12.2
+    tzdata                        2025.1
+    uri-template                  1.3.0
+    urllib3                       2.2.2
+    virtualenv                    20.30.0
+    wcwidth                       0.2.13
+    webcolors                     24.11.1
+    webencodings                  0.5.1
+    websocket-client              1.8.0
+    Werkzeug                      3.1.3
+    wheel                         0.45.1
+    widgetsnbextension            4.0.13
+    wifi                          0.3.8
+    wordcloud                     1.9.3
+    wrapt                         1.17.2
+    wsproto                       1.2.0
+    xlrd                          2.0.1
+    xlwt                          1.3.0
+    you-get                       0.4.1743
+    yt-dlp                        2025.2.28.232826.dev0
+    """
+    
+    # 解析需要的库列表
+    required_packages = []
+    for line in required_list.strip().split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+        parts = line.split()
+        if len(parts) < 2:
+            print(f"警告：跳过无效行：{line}")
+            continue
+        name = parts[0]
+        version = parts[1]
+        required_packages.append((name, version))
+    
+    # 获取已安装的包（转换为小写）
+    installed_packages = {pkg.key.lower(): pkg.version for pkg in pkg_resources.working_set}
+    
+    # 检查未安装的库
+    missing_packages = []
+    for name, req_version in required_packages:
+        lower_name = name.lower()
+        if lower_name not in installed_packages:
+            missing_packages.append((name, req_version))
+    
+    # 输出结果
+    if missing_packages:
+        print("以下库未安装：")
+        for name, ver in missing_packages:
+            print(f" - {name} (要求版本：{ver})")
+    else:
+        print("所有列出的库均已安装。")
+
+if __name__ == "__main__":
+    check_installed_packages()
